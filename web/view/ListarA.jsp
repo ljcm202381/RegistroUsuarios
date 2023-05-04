@@ -39,11 +39,27 @@
              Aprendiz usu =null;
              while(it.hasNext()){
                  usu=it.next();
-                }
+                
             %>
+            <tbody>
+                <tr>
+                    <td class="text-center"><%=usu.getId()%></td>
+                    <td class="text-center"><%=usu.getCodapred()%></td>
+                    <td class="text-center"><%=usu.getNombreap()%></td>
+                    <td class="text-center"><%=usu.getApellidoap()%></td>
+                    <td class="text-center"><%=usu.getEmailap()%></td>
+                    <td class="text-center"><%=usu.getTeleap()%></td>
+                   
+                    <td class="text-center">
+                        <a class="btn btn-danger" href="">EDITAR</a>
+                        <a class="btn btn-warning" href="">ELIMINAR</a>
+                        
+                    </td>   
+                </tr>
+              <% } %>
+                   </tbody>
             
-            
-            
+                      
         </table>
         </div>
     </body>
