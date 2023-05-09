@@ -64,12 +64,20 @@ public boolean registraap(Aprendiz ap) {
 
     @Override
     public boolean actualizarap(Aprendiz ap) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "update Aprendiz set Docu='"+usu.getCodapred()+"',Nombrea='"+usu.getNombreap()+"',Apellidoa='"+usu.getApellidoap()+"',Correoa='"+usu.getEmailap()+"',Numcontacto='"+usu.getTeleap()+"' where id="+usu.getId();
+        try{
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        }  catch (Exception e)  {
+        }
+        return false;  
+    
     }
 
     @Override
     public boolean eliminarap(int id) {
-        String sql="delete from Aprendiz where id="+id;
+        String sql="delete from aprendiz where id="+id;
         try {
             con=cn.getConnection();
             ps=con.prepareStatement(sql);

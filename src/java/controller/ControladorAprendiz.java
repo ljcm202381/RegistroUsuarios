@@ -21,8 +21,12 @@ public class ControladorAprendiz extends HttpServlet {
 
   String agregarapre = "index.jsp";
   String listarapre = "view/ListarA.jsp";
+  String editarapre = "view/EditarA.jsp";
+  
+  
   Aprendiz ape = new Aprendiz();
   AprendizDao apedao = new AprendizDao();
+  int id;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -54,14 +58,14 @@ public class ControladorAprendiz extends HttpServlet {
             throws ServletException, IOException {
          String acceso="";
         String action=request.getParameter("accion");
-        if(action.equalsIgnoreCase("listarapre"))
+        if(action.equalsIgnoreCase("listar"))
         {
             acceso=listarapre;
         }else if(action.equalsIgnoreCase("agregarapre"))
         {
           acceso=agregarapre;
         }
-        if(action.equalsIgnoreCase("Agregar"))
+       else if(action.equalsIgnoreCase("Agregar"))
         {
             int codapre = Integer.parseInt(request.getParameter("txtdoc"));
             String nombreapre = request.getParameter("txtNom");
@@ -74,11 +78,23 @@ public class ControladorAprendiz extends HttpServlet {
             ape.setEmailap(emailapre);
             ape.setTeleap(teleapre);
             apedao.registraap(ape);
-            
+            acceso=listarapre;
+        }else if(action.equalsIgnoreCase("eliminar")){  
+            id=Integer.parseInt(request.getParameter("id"));
+            ape.setId(id);
+            apedao.eliminarap(id);
+            acceso=listarapre;
+        }else if(action.equalsIgnoreCase("editar"))
+        {
+            acceso=editarapre;
             
         RequestDispatcher view=request.getRequestDispatcher(acceso);
         view.forward(request, response);
-        }
+        }    
+            
+            
+       
+        
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

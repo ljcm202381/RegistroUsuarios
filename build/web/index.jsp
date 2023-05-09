@@ -29,9 +29,10 @@
                     <input class="form-control" type="number" name="txttel"><br>
                     <br>
                     <input class="btn btn-primary" type="submit" name="accion" value="Agregar">
-                   
+                    
                 </form>
             </div>
 
         </div>
+      
 </html>
