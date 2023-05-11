@@ -19,8 +19,27 @@ Conexion cn=new Conexion();
     ResultSet rs;
     Aprendiz usu=new Aprendiz();
     @Override
-    public Aprendiz list(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Aprendiz list(int ide) {
+       String sql = "select * from aprendiz where id="+ide;
+       try{
+       con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+             usu.setId(rs.getInt("id"));
+             usu.setCodapred(rs.getInt("Docu"));
+             usu.setNombreap(rs.getString("Nombrea"));
+             usu.setApellidoap(rs.getString("Apellidoa"));
+             usu.setEmailap((rs.getString("Correoa")));
+             usu.setTeleap(rs.getInt("Numcontacto"));
+            }
+            
+       }catch(Exception e)
+       {
+          JOptionPane.showMessageDialog(null,"No puede traer la informacion");
+       }
+       return usu;
     }
 
     @Override
@@ -64,7 +83,7 @@ public boolean registraap(Aprendiz ap) {
 
     @Override
     public boolean actualizarap(Aprendiz ap) {
-        String sql = "update Aprendiz set Docu='"+usu.getCodapred()+"',Nombrea='"+usu.getNombreap()+"',Apellidoa='"+usu.getApellidoap()+"',Correoa='"+usu.getEmailap()+"',Numcontacto='"+usu.getTeleap()+"' where id="+usu.getId();
+        String sql = "update aprendiz set Docu='"+usu.getCodapred()+"',Nombrea='"+usu.getNombreap()+"',Apellidoa='"+usu.getApellidoap()+"',Correoa='"+usu.getEmailap()+"',Numcontacto='"+usu.getTeleap()+"' where id="+usu.getId();
         try{
             con=cn.getConnection();
             ps=con.prepareStatement(sql);
@@ -82,7 +101,10 @@ public boolean registraap(Aprendiz ap) {
             con=cn.getConnection();
             ps=con.prepareStatement(sql);
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Aprendiz eliminado");
+            
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Aprendiz no se puede eliminar");
         }
         return false;
     

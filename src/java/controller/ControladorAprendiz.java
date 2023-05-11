@@ -60,6 +60,7 @@ public class ControladorAprendiz extends HttpServlet {
         String action=request.getParameter("accion");
         if(action.equalsIgnoreCase("listar"))
         {
+            
             acceso=listarapre;
         }else if(action.equalsIgnoreCase("agregarapre"))
         {
@@ -86,7 +87,28 @@ public class ControladorAprendiz extends HttpServlet {
             acceso=listarapre;
         }else if(action.equalsIgnoreCase("editar"))
         {
+            request.setAttribute("id",request.getParameter("id"));
             acceso=editarapre;
+            
+        }else if(action.equalsIgnoreCase("Actualizar"))
+        {
+            id=Integer.parseInt(request.getParameter("txtid"));
+            int codapre = Integer.parseInt(request.getParameter("txtdoc1"));
+            String nombreapre = request.getParameter("txtNom1");
+            String apellidoapre = request.getParameter("ttxtApe1");
+            String emailapre = request.getParameter("txtemail1");
+            int teleapre = Integer.parseInt(request.getParameter("txttel1"));
+            
+            ape.setId(id);
+            ape.setCodapred(codapre);
+            ape.setNombreap(nombreapre);
+            ape.setApellidoap(apellidoapre);
+            ape.setEmailap(emailapre);
+            ape.setTeleap(teleapre);
+            apedao.actualizarap(ape);
+            acceso=listarapre;
+            
+        }    
             
         RequestDispatcher view=request.getRequestDispatcher(acceso);
         view.forward(request, response);
@@ -95,7 +117,7 @@ public class ControladorAprendiz extends HttpServlet {
             
        
         
-    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
