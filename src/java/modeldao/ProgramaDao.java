@@ -9,6 +9,7 @@ import interfaz.MePrograma;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Programa;
@@ -26,9 +27,27 @@ public class ProgramaDao implements MePrograma{
 
     @Override
     public List listadopro() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      
+     ArrayList<Programa> lista = new ArrayList<Programa>();
+        String sql = "select * from programa";
+        try{
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                Programa pro = new Programa();
+                pro.setCodprograma(rs.getInt("codpro"));
+                pro.setNomprograma(rs.getString("nompro"));
+               
+                lista.add(pro);
+                
+            }
+        }catch(Exception e)
+        {
+        }
+        return lista;
     }
-
     @Override
     public boolean registrarpro(Programa pro) {
        String sql= "insert into programa(codpro,nompro)values('"+pro.getCodprograma()+"','"+pro.getNomprograma()+"')";

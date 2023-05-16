@@ -83,7 +83,7 @@ public boolean registraap(Aprendiz ap) {
 
     @Override
     public boolean actualizarap(Aprendiz ap) {
-        String sql = "update aprendiz set Docu='"+usu.getCodapred()+"',Nombrea='"+usu.getNombreap()+"',Apellidoa='"+usu.getApellidoap()+"',Correoa='"+usu.getEmailap()+"',Numcontacto='"+usu.getTeleap()+"' where id="+usu.getId();
+        String sql = "update aprendiz set Docu='"+usu.getCodapred()+"' ,Nombrea='"+usu.getNombreap()+"' ,Apellidoa='"+usu.getApellidoap()+"' ,Correoa='"+usu.getEmailap()+"' ,Numcontacto='"+usu.getTeleap()+"' where id="+usu.getId();
         try{
             con=cn.getConnection();
             ps=con.prepareStatement(sql);
